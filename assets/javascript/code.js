@@ -24,8 +24,12 @@ database.ref().set({
             whichPlayerTurn:1
             });
 var playerNum=1; //to set the player as player1/player2
+var player1Choice="";
+var player2Choice="";
 var player1Wins=0; 
 var player2Wins=0;
+var player1Loss=0; 
+var player2Loss=0;
 var ties=0;
 //var readyToPlay=false;
 $("#getName").on("click",getPlayerName);
@@ -64,7 +68,11 @@ database.ref("/player1").on("value", function(childSnapshot){
 database.ref("/player2").on("value", function(childSnapshot){
     player2Choice=childSnapshot.val().playerChoice;
     console.log("player2 chose "+player2Choice);
-    winner(player1Choice,player2Choice);
+    if(player1Choice!=undefined && player2Choice!=undefined)
+    {
+        alert(player1Choice+"-"+player2Choice);
+        whoWon(player1Choice,player2Choice);
+    }
 },
 function(error){console.log(error.code);}
 );
@@ -147,33 +155,39 @@ function rpsSelect()
 }
 
 //logic to determine the winner
-function winner(player1Choice,player2Choice)
+function whoWon(player1Choice,player2Choice)
 {
     console.log("check1: "+player1Choice);
     console.log("check2: "+player2Choice);
     var winner="";
      if ((player1Choice === "rock") && (player2Choice === "s")) {
             player1Wins++;
+            player2Loss++;
             winner="1";
           }
           else if ((player1Choice === "rock") && (player2Choice === "paper")) {
             player2Wins++;
+            player1Loss++;
             winner="2";
           }
           else if ((player1Choice === "scissor") && (player2Choice === "rock")) {
             player2Wins++;
+            player1Loss++;
             winner="2";
           }
           else if ((player1Choice === "scissor") && (player2Choice === "paper")) {
             player1Wins++;
+            player2Loss++;
             winner="1";
           }
           else if ((player1Choice === "paper") && (player2Choice === "rock")) {
             player1Wins++;
+            player2Loss++;
             winner="1";
           }
           else if ((player1Choice === "paper") && (player2Choice === "scissor")) {
             player2Wins++;
+            player1Loss++;
             winner="2";
           }
           else if (player1Choice === player2Choice) {
@@ -184,7 +198,9 @@ function winner(player1Choice,player2Choice)
           console.log(player2Wins);
           console.log(ties);
           $("#player1Wins").html("Wins: "+player1Wins);
+          $("#player1Lose").html("Losses: "+ player1Loss);
           $("#player2Wins").html("Wins: "+player2Wins);
+          $("#player2Lose").html("Losses: "+ player2Loss);
          
           displayWinner(winner);
          
