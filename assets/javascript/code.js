@@ -33,7 +33,9 @@ var player2Loss=0;
 var ties=0;
 //var readyToPlay=false;
 $("#getName").on("click",getPlayerName);
-$(".rpsButton").on("click",rpsSelect)
+$(".rpsButton").on("click",rpsSelect);
+$("#sendMsg").on("click",sendMessage);
+$("#chatText").val("");
 //----------database---------------------------------------
 
 database.ref().on("value", function(snapshot) {
@@ -76,6 +78,10 @@ database.ref("/player2").on("value", function(childSnapshot){
 function(error){console.log(error.code);}
 );
 
+database.ref("/chatMessages").on("value",function(snapshot){
+    console.log(snapshot.val());
+    $("#chatScreen").append(snapshot.val());
+});
 
 //------Functions--------------------------------------------
 function setPlayer1Div()
@@ -226,19 +232,14 @@ console.log("playerNum"+sessionStorage.getItem("me"));
                 });
           
 }
-// function quitgame()
-// {
-//     if(player.name === player1)
-//     {
-//         console.log(player.name+"is player1");
-//         database.ref().set({  player1:null });
-//     }
-//     if(player.name === player2)
-//     {
-//         console.log(player.name+"is player2");
-//         database.ref().set({  player2:null });
-//     }
-//      $("#enter").show();
-//     $("#intro").hide();
 
-// }
+function sendMessage()
+{
+    event.preventDefault();
+    var msg=$("#chatText").val().trim();
+    msg=player.name+":"+msg + "\n";
+    console.log (msg);
+    database.ref().set({
+                    chatMessages:msg
+                });
+}
