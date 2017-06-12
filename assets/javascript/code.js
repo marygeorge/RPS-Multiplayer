@@ -64,7 +64,6 @@ database.ref("/player1").on("value", function(childSnapshot){
 );
 
 //when player2 values change. check for winner is called here
-//**************problem not getting triggered when the player chooses the same choice again
 database.ref("/player2").on("value", function(childSnapshot){
     player2Choice=childSnapshot.val().playerChoice;
     console.log("player2 chose "+player2Choice);
@@ -76,7 +75,7 @@ database.ref("/player2").on("value", function(childSnapshot){
 },
 function(error){console.log(error.code);}
 );
-// set whose turn values
+
 
 //------Functions--------------------------------------------
 function setPlayer1Div()
@@ -222,6 +221,9 @@ console.log("playerNum"+sessionStorage.getItem("me"));
         {
                 $("#gameResult").html("It's a tie");
         }
+        database.ref().set({
+                    whichPlayerTurn:1
+                });
           
 }
 // function quitgame()
