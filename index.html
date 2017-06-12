@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RPS</title>
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Ceviche+One|Coiny" rel="stylesheet">
+    <!--  link to CSS file -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+     <!-- Added link to the jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
+    
+</head>
+<body>
+
+    <div id="header"></div>
+    <div id="enter">
+        <input type="text" id="nameText" placeholder="Enter Name"/>
+        <button id="getName"  >Start</button>
+    </div>  
+    <div id="intro" hidden="hidden">
+        <font id="greet"></font><br>
+        <font id="turnText"></font>
+        <!--<button id="quit" >Quit Game</button>-->
+    </div>
+    <div id="playarea">
+        <div id="player1Area">
+            <font id="player1Name" ></font><br>
+            <div id="play1Choices" hidden="hidden">
+                <button class="rpsButton" id="p1o1" data="rock"><img  src="assets/css/Rock.png"/></button><br>
+                <button class="rpsButton" id="p1o2" data="paper"><img src="assets/css/Paper.png"/></button><br>
+                <button class="rpsButton" id="p1o3" data="scissor"><img src="assets/css/Scissor.png"/></button><br>
+            </div>
+            <font id="player1Wins">Wins:</font><br>
+            <!--<font id="player1Lose">Losses:</font>-->
+        </div>
+        <div id="scoreArea">
+            <font id="gameResult"></font>
+        </div>
+        <div id="player2Area">
+            <font id="player2Name"></font><br>
+            <div id="play2Choices" hidden="hidden">
+                <button class="rpsButton" id="p2o1" data="rock"><img  src="assets/css/Rock.png"/></button><br>
+                <button class="rpsButton" id="p2o2" data="paper"><img src="assets/css/Paper.png"/></button><br>
+                <button class="rpsButton" id="p2o3" data="scissor"><img src="assets/css/Scissor.png"/></button><br>
+            </div>
+            <font id="player2Wins">Wins:</font><br>
+            <!--<font id="player2Lose">Losses:</font>-->
+        </div>
+    </div>
+
+    <div id="chatArea">
+    </div>
+
+<!--  link to js file -->
+<script src="assets/javascript/code.js"></script>
+</body>
+</html>
